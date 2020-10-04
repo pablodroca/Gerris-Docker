@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  gerris:
+    privileged: true
+    build:
+      context: .
+      dockerfile: Debian/Dockerfile
+      args:
+          DEFAULT_USER: ${USER}
+          DEFAULT_UID: 1000 #Use the value of ${UID}
+    image: gerris
+#    user: ${USER}
+    volumes:
+      #- ./30_dense_grid_python3:/home/workspace/gerris/30_dense_grid_python3
+      - ./examples/cylinder_control:/home/workspace/gerris/cylinder_control
+      - ./media-data:/media/DATA/workspace
+    #command: ["30_dense_grid_python3/cylinder_natural"]
+    command: ["cylinder_control"]
+
